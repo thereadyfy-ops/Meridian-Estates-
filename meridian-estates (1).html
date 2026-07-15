@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Estates — Prime Addresses, DHA Karachi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e14;
+    --bg-raised: #10151d;
+    --bg-panel: #141a23;
+    --line: rgba(201,162,39,0.16);
+    --line-soft: rgba(232,236,241,0.07);
+    --ink: #e9ecf1;
+    --ink-dim: #8e97a6;
+    --ink-faint: #5d6472;
+    --gold: #c9a227;
+    --gold-bright: #e2bc4c;
+    --blue: #3e7cff;
+    --blue-dim: #2a4d94;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  ::selection{background:var(--gold); color:#0a0e14;}
+
+  /* blueprint grid background */
+  .blueprint{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 30%, black 40%, transparent 85%);
+  }
+  .noise-vignette{
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 60% 50% at 50% -10%, rgba(62,124,255,0.10), transparent 60%),
+                radial-gradient(ellipse 50% 40% at 100% 100%, rgba(201,162,39,0.08), transparent 60%);
+  }
+
+  .container{max-width:1280px; margin:0 auto; padding:0 28px;}
+
+  /* nav */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    padding:22px 0;
+    transition: all .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(10,14,20,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom:1px solid var(--line-soft);
+    padding:14px 0;
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink);}
+  .logo-mark{
+    width:34px; height:34px; border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; flex-shrink:0;
+  }
+  .logo-mark::before{
+    content:"";
+    position:absolute; width:8px; height:8px; border-radius:50%;
+    background:var(--blue); box-shadow:0 0 10px 2px rgba(62,124,255,0.6);
+  }
+  .logo-text{font-family:'Fraunces',serif; font-size:19px; letter-spacing:0.02em; font-weight:500;}
+  .logo-text b{color:var(--gold); font-weight:600;}
+  .nav-links{display:flex; gap:36px; list-style:none; margin:0; padding:0;}
+  .nav-links a{color:var(--ink-dim); text-decoration:none; font-size:14px; font-weight:500; transition:color .25s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{
+    border:1px solid var(--line); color:var(--ink); text-decoration:none;
+    padding:10px 20px; font-size:13px; font-weight:600; letter-spacing:0.02em;
+    transition:all .25s; white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--gold); border-color:var(--gold); color:#0a0e14;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--ink); font-size:24px; cursor:pointer;}
+
+  /* hero */
+  .hero{position:relative; padding:170px 0 110px; overflow:hidden;}
+  .hero-bg{
+    position:absolute; inset:0; z-index:0;
+    background-image:url('https://loremflickr.com/1800/1000/mansion,architecture?lock=42');
+    background-size:cover; background-position:center 40%;
+  }
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(9,12,17,0.88) 0%, rgba(9,12,17,0.93) 55%, var(--bg) 100%),
+               linear-gradient(90deg, rgba(9,12,17,0.55) 0%, rgba(9,12,17,0.2) 55%, rgba(9,12,17,0.65) 100%);
+  }
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center; position:relative; z-index:2;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em;
+    color:var(--gold-bright); text-transform:uppercase; margin-bottom:22px;
+  }
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--gold);}
+  h1.hero-title{
+    font-size:clamp(38px, 4.8vw, 64px);
+    line-height:1.06; font-weight:500; margin:0 0 22px; letter-spacing:-0.01em;
+  }
+  h1.hero-title em{font-style:italic; color:var(--gold-bright); font-weight:400;}
+  .hero-sub{color:var(--ink-dim); font-size:16.5px; line-height:1.7; max-width:490px; margin-bottom:36px;}
+  .hero-actions{display:flex; gap:16px; align-items:center; margin-bottom:52px;}
+  .btn-primary{
+    background:var(--gold); color:#0a0e14; text-decoration:none;
+    padding:15px 30px; font-weight:600; font-size:14.5px; letter-spacing:0.01em;
+    border:1px solid var(--gold); transition:all .25s;
+  }
+  .btn-primary:hover{background:transparent; color:var(--gold-bright);}
+  .btn-ghost{
+    color:var(--ink); text-decoration:none; font-size:14.5px; font-weight:500;
+    display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--line-soft); padding-bottom:3px;
+    transition:border-color .25s;
+  }
+  .btn-ghost:hover{border-color:var(--gold);}
+  .hero-stats{display:flex; gap:44px;}
+  .stat-num{font-family:'Fraunces',serif; font-size:28px; color:var(--ink); font-weight:500;}
+  .stat-label{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px;}
+
+  /* hero visual: coordinate / plot card */
+  .hero-visual{position:relative; height:460px;}
+  .plot-frame{
+    position:absolute; inset:0; border:1px solid var(--line);
+  }
+  .plot-frame::before, .plot-frame::after{
+    content:""; position:absolute; width:14px; height:14px; border:1px solid var(--gold);
+  }
+  .plot-frame::before{top:-1px; left:-1px; border-right:none; border-bottom:none;}
+  .plot-frame::after{bottom:-1px; right:-1px; border-left:none; border-top:none;}
+  .pin{
+    position:absolute; top:38%; left:46%; width:14px; height:14px; border-radius:50%;
+    background:var(--blue); box-shadow:0 0 0 6px rgba(62,124,255,0.15), 0 0 20px 4px rgba(62,124,255,0.5);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 6px rgba(62,124,255,0.15), 0 0 20px 4px rgba(62,124,255,0.5);}
+    50%{box-shadow:0 0 0 10px rgba(62,124,255,0.08), 0 0 26px 6px rgba(62,124,255,0.65);}
+  }
+  .float-card{
+    position:absolute; background:var(--bg-panel); border:1px solid var(--line-soft);
+    padding:14px; width:210px; box-shadow:0 20px 40px -12px rgba(0,0,0,0.6);
+    animation: float 6s ease-in-out infinite;
+  }
+  .float-thumb{width:100%; height:90px; object-fit:cover; margin-bottom:12px; filter:saturate(0.9) brightness(0.88);}
+  .float-card.card-a{top:8%; left:2%; animation-delay:0s;}
+  .float-card.card-b{bottom:10%; right:0%; animation-delay:1.4s;}
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .deed-tag{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--gold-bright);
+    letter-spacing:0.06em; margin-bottom:8px; display:block;
+  }
+  .float-card h4{margin:0 0 6px; font-size:15px; font-weight:500;}
+  .float-card p{margin:0; font-size:12px; color:var(--ink-faint);}
+  .float-price{font-family:'Fraunces',serif; color:var(--gold); font-size:17px; margin-top:8px;}
+
+  /* search bar */
+  .search-bar{
+    position:relative; z-index:3; margin-top:-40px; margin-bottom:90px;
+  }
+  .search-panel{
+    background:var(--bg-raised); border:1px solid var(--line-soft);
+    padding:26px; display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr auto; gap:0;
+    position:relative;
+  }
+  .search-panel::before{
+    content:""; position:absolute; top:0; left:0; width:100%; height:2px;
+    background:linear-gradient(90deg, var(--gold), transparent 60%);
+  }
+  .search-field{padding:0 22px; border-right:1px solid var(--line-soft); display:flex; flex-direction:column; gap:6px;}
+  .search-field:first-child{padding-left:4px;}
+  .search-field label{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint);}
+  .search-field select, .search-field input{
+    background:none; border:none; color:var(--ink); font-size:14.5px; font-family:'Inter',sans-serif;
+    padding:0; outline:none; appearance:none;
+  }
+  .search-submit{
+    background:var(--gold); color:#0a0e14; border:none; padding:0 34px; font-weight:600;
+    font-size:14px; cursor:pointer; margin-left:22px; transition:background .25s;
+  }
+  .search-submit:hover{background:var(--gold-bright);}
+
+  /* section heading */
+  .section{padding:100px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; gap:30px; flex-wrap:wrap;}
+  .section-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--blue); letter-spacing:0.12em;
+    text-transform:uppercase; margin-bottom:14px; display:block;
+  }
+  .section-head h2{font-size:clamp(28px,3.2vw,40px); font-weight:500; margin:0; line-height:1.15; max-width:560px;}
+  .section-head p{color:var(--ink-dim); font-size:15px; max-width:360px; line-height:1.7; margin:0;}
+
+  /* listing cards */
+  .listings-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line-soft);}
+  .listing-card{background:var(--bg); position:relative; padding:0; transition:transform .3s;}
+  .listing-visual{
+    height:230px; position:relative; overflow:hidden;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .listing-visual img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    transition:transform .6s ease, filter .4s ease;
+    filter:saturate(0.9) brightness(0.85);
+  }
+  .listing-card:hover .listing-visual img{transform:scale(1.06); filter:saturate(1) brightness(0.9);}
+  .listing-visual::before{
+    content:""; position:absolute; inset:0; z-index:2;
+    background:linear-gradient(180deg, rgba(9,12,17,0.15) 0%, rgba(9,12,17,0.05) 40%, rgba(9,12,17,0.75) 100%);
+  }
+  .listing-status{
+    position:absolute; top:14px; left:14px; z-index:3;
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase;
+    padding:5px 10px; border:1px solid var(--gold); color:var(--gold-bright); background:rgba(10,14,20,0.7);
+  }
+  .listing-code{
+    position:absolute; bottom:14px; right:14px; z-index:3;
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--ink-faint);
+  }
+  .listing-body{padding:26px 26px 28px;}
+  .listing-body h3{margin:0 0 6px; font-size:19px; font-weight:500;}
+  .listing-loc{color:var(--ink-faint); font-size:13px; margin-bottom:18px;}
+  .listing-specs{display:flex; gap:18px; margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--line-soft);}
+  .spec{display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-dim);}
+  .spec svg{width:15px; height:15px; opacity:0.7;}
+  .listing-foot{display:flex; justify-content:space-between; align-items:center;}
+  .listing-price{font-family:'Fraunces',serif; font-size:20px; color:var(--gold-bright);}
+  .listing-price span{font-family:'Inter',sans-serif; font-size:11.5px; color:var(--ink-faint); font-weight:400;}
+  .listing-arrow{width:34px; height:34px; border:1px solid var(--line-soft); display:flex; align-items:center; justify-content:center; transition:all .25s;}
+  .listing-card:hover .listing-arrow{background:var(--gold); border-color:var(--gold);}
+  .listing-card:hover .listing-arrow svg path{stroke:#0a0e14;}
+
+  /* grid bg pattern per card */
+  .grid-bg-1{background:radial-gradient(circle at 30% 30%, rgba(62,124,255,0.10), transparent 60%), var(--bg-raised);}
+  .grid-bg-2{background:radial-gradient(circle at 70% 40%, rgba(201,162,39,0.10), transparent 60%), var(--bg-raised);}
+  .grid-bg-3{background:radial-gradient(circle at 50% 70%, rgba(62,124,255,0.08), transparent 60%), var(--bg-raised);}
+
+  /* types strip */
+  .types-strip{display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line-soft);}
+  .type-item{
+    padding:36px 28px; border-right:1px solid var(--line-soft); text-decoration:none; color:var(--ink);
+    transition:background .3s; position:relative;
+  }
+  .type-item:last-child{border-right:none;}
+  .type-item:hover{background:var(--bg-raised);}
+  .type-item svg{width:30px; height:30px; color:var(--gold); margin-bottom:20px;}
+  .type-item h4{font-size:17px; font-weight:500; margin:0 0 6px;}
+  .type-item p{margin:0; font-size:12.5px; color:var(--ink-faint);}
+
+  /* neighborhoods */
+  .hood-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line-soft);}
+  .hood-card{
+    background:var(--bg); padding:30px 24px; min-height:180px; display:flex; flex-direction:column; justify-content:space-between;
+    text-decoration:none; color:var(--ink); position:relative; overflow:hidden;
+  }
+  .hood-card::after{
+    content:""; position:absolute; inset:0;
+    background-image:linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:18px 18px; opacity:0; transition:opacity .3s;
+  }
+  .hood-card:hover::after{opacity:1;}
+  .hood-code{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold-bright); letter-spacing:0.08em;}
+  .hood-name{font-family:'Fraunces',serif; font-size:21px; font-weight:500; margin-top:14px;}
+  .hood-count{font-size:12px; color:var(--ink-faint); margin-top:auto; position:relative; z-index:1;}
+
+  /* why us */
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:40px;}
+  .why-item{border-top:1px solid var(--line); padding-top:24px;}
+  .why-item svg{width:26px; height:26px; color:var(--blue); margin-bottom:20px;}
+  .why-item h3{font-size:19px; font-weight:500; margin:0 0 10px;}
+  .why-item p{color:var(--ink-dim); font-size:14px; line-height:1.7; margin:0;}
+
+  /* process (legit sequence) */
+  .process-wrap{position:relative;}
+  .process-line{position:absolute; top:22px; left:0; right:0; height:1px; background:var(--line-soft);}
+  .process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:30px; position:relative;}
+  .process-step{position:relative;}
+  .process-num{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--gold-bright);
+    width:44px; height:44px; border:1px solid var(--gold); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; background:var(--bg); margin-bottom:24px; position:relative; z-index:2;
+  }
+  .process-step h4{font-size:17px; font-weight:500; margin:0 0 10px;}
+  .process-step p{font-size:13.5px; color:var(--ink-dim); line-height:1.65; margin:0;}
+
+  /* agents */
+  .agents-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line-soft);}
+  .agent-card{background:var(--bg); padding:30px 24px;}
+  .agent-photo{
+    width:100%; aspect-ratio:1; border:1px solid var(--line-soft); margin-bottom:20px;
+    position:relative; overflow:hidden; background:var(--bg-raised);
+  }
+  .agent-photo img{
+    width:100%; height:100%; object-fit:cover;
+    filter:grayscale(85%) contrast(1.08) brightness(0.82);
+    transition:filter .4s ease, transform .5s ease;
+  }
+  .agent-card:hover .agent-photo img{filter:grayscale(30%) contrast(1.05) brightness(0.92); transform:scale(1.04);}
+  .agent-photo::before{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(160deg, rgba(62,124,255,0.35), rgba(201,162,39,0.22));
+    mix-blend-mode:color;
+  }
+  .agent-card h4{font-size:16.5px; font-weight:500; margin:0 0 4px;}
+  .agent-role{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold-bright); text-transform:uppercase; letter-spacing:0.05em;}
+  .agent-stat{font-size:12px; color:var(--ink-faint); margin-top:14px; padding-top:14px; border-top:1px solid var(--line-soft);}
+
+  /* testimonials */
+  .test-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:40px;}
+  .test-card{border-left:1px solid var(--gold); padding-left:24px;}
+  .test-card p{font-family:'Fraunces',serif; font-size:17px; line-height:1.6; font-weight:400; font-style:italic; color:var(--ink); margin:0 0 20px;}
+  .test-name{font-size:13.5px; font-weight:600;}
+  .test-role{font-size:12px; color:var(--ink-faint); font-family:'JetBrains Mono',monospace;}
+
+  /* cta band */
+  .cta-band{
+    position:relative; padding:90px 0; text-align:center; overflow:hidden;
+    border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);
+  }
+  .cta-band h2{font-size:clamp(30px,4vw,46px); font-weight:500; max-width:760px; margin:0 auto 30px;}
+  .cta-band .btn-primary{margin:0 8px;}
+
+  footer{padding:70px 0 34px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:50px; margin-bottom:60px;}
+  .footer-col h5{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 20px;}
+  .footer-col a{display:block; color:var(--ink-dim); text-decoration:none; font-size:14px; margin-bottom:12px; transition:color .2s;}
+  .footer-col a:hover{color:var(--gold-bright);}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:30px; border-top:1px solid var(--line-soft); flex-wrap:wrap; gap:14px;}
+  .footer-bottom p{margin:0; font-size:12.5px; color:var(--ink-faint);}
+  .credit{font-size:12px; color:var(--ink-faint);}
+  .credit a{color:var(--gold-bright); text-decoration:none;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width: 980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:340px; margin-top:20px;}
+    .search-panel{grid-template-columns:1fr 1fr; gap:20px; padding:22px;}
+    .search-field{border-right:none; padding:0;}
+    .search-submit{grid-column:span 2; margin:10px 0 0; padding:14px;}
+    .listings-grid, .hood-grid, .agents-grid{grid-template-columns:repeat(2,1fr);}
+    .types-strip{grid-template-columns:repeat(2,1fr);}
+    .type-item:nth-child(2){border-right:none;}
+    .why-grid, .process-grid, .test-grid{grid-template-columns:1fr; gap:36px;}
+    .footer-grid{grid-template-columns:1fr 1fr; gap:36px;}
+    .nav-links{display:none;}
+    .nav-toggle{display:block;}
+  }
+  @media (max-width: 620px){
+    .listings-grid, .hood-grid, .agents-grid, .types-strip{grid-template-columns:1fr;}
+    .type-item{border-right:none; border-bottom:1px solid var(--line-soft);}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-actions{flex-direction:column; align-items:flex-start;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">
+        <div class="logo-mark"></div>
+        <span class="logo-text">MERIDIAN <b>ESTATES</b></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#listings">Listings</a></li>
+        <li><a href="#neighborhoods">Neighborhoods</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#agents">Agents</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Book a Consultation</a>
+      <button class="nav-toggle" aria-label="menu">☰</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="blueprint"></div>
+  <div class="noise-vignette"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">DHA · Bahria Town · Clifton — Karachi</span>
+        <h1 class="hero-title">Every address<br>is a <em>coordinate</em>.<br>We help you find yours.</h1>
+        <p class="hero-sub">Meridian Estates maps Karachi's finest addresses with surveyor's precision — from DHA plots to Clifton residences — matching buyers, tenants, and investors to the exact property their life calls for.</p>
+        <div class="hero-actions">
+          <a href="#listings" class="btn-primary">View Listings</a>
+          <a href="#contact" class="btn-ghost">Talk to an agent →</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num" data-count="640">0</div>
+            <div class="stat-label">Properties Closed</div>
+          </div>
+          <div>
+            <div class="stat-num" data-count="18">0</div>
+            <div class="stat-label">Years Surveying</div>
+          </div>
+          <div>
+            <div class="stat-num" data-count="97">0</div>
+            <div class="stat-label">% Client Return Rate</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="plot-frame"></div>
+        <div class="pin"></div>
+        <div class="float-card card-a">
+          <img class="float-thumb" src="https://loremflickr.com/300/150/bungalow,house?lock=201" alt="Corner bungalow thumbnail" loading="lazy">
+          <span class="deed-tag">MRD-014 · DHA PH VI</span>
+          <h4>Corner Bungalow, 500 Sq Yd</h4>
+          <p>DHA Phase VI, Karachi</p>
+          <div class="float-price">PKR 4.8 Cr</div>
+        </div>
+        <div class="float-card card-b">
+          <img class="float-thumb" src="https://loremflickr.com/300/150/apartment,balcony-view?lock=202" alt="Sea-facing apartment thumbnail" loading="lazy">
+          <span class="deed-tag">MRD-027 · CLIFTON</span>
+          <h4>Sea-Facing Apartment</h4>
+          <p>Block 5, Clifton</p>
+          <div class="float-price">PKR 2.1 Cr</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container search-bar">
+  <div class="search-panel">
+    <div class="search-field">
+      <label>Location</label>
+      <select>
+        <option>DHA Phase VI</option>
+        <option>DHA Phase VIII</option>
+        <option>Bahria Town Karachi</option>
+        <option>Clifton Block 5</option>
+        <option>Bukhari Commercial</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Status</label>
+      <select>
+        <option>For Sale</option>
+        <option>For Rent</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Type</label>
+      <select>
+        <option>House</option>
+        <option>Apartment</option>
+        <option>Plot</option>
+        <option>Commercial</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Budget</label>
+      <select>
+        <option>Up to 1 Cr</option>
+        <option>1 – 3 Cr</option>
+        <option>3 – 6 Cr</option>
+        <option>6 Cr +</option>
+      </select>
+    </div>
+    <button class="search-submit">Search</button>
+  </div>
+</div>
+
+<section class="section" id="listings">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow">Featured Plots · 03 Active</span>
+        <h2>Handpicked addresses, surveyed and verified.</h2>
+      </div>
+      <p>Every listing on Meridian carries a verified deed tag — no guesswork, no duplicate files, no disputed titles.</p>
+    </div>
+
+    <div class="listings-grid reveal">
+      <div class="listing-card">
+        <div class="listing-visual">
+          <img src="https://loremflickr.com/600/450/modern-house,bungalow?lock=101" alt="Corner bungalow exterior, DHA Phase VI" loading="lazy">
+          <span class="listing-status">For Sale</span>
+          <span class="listing-code mono">MRD-014</span>
+        </div>
+        <div class="listing-body">
+          <h3>Corner Bungalow, 500 Sq Yd</h3>
+          <div class="listing-loc">DHA Phase VI, Karachi</div>
+          <div class="listing-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 10v9h18v-9M3 10l9-6 9 6M9 19v-5h6v5"/></svg>5 Bed</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>6 Bath</span>
+            <span class="spec mono">500 Sq Yd</span>
+          </div>
+          <div class="listing-foot">
+            <div class="listing-price">PKR 4.8 Cr <span>· fixed</span></div>
+            <div class="listing-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--ink)" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-visual">
+          <img src="https://loremflickr.com/600/450/apartment,livingroom?lock=102" alt="Sea-facing apartment interior, Clifton" loading="lazy">
+          <span class="listing-status">For Rent</span>
+          <span class="listing-code mono">MRD-027</span>
+        </div>
+        <div class="listing-body">
+          <h3>Sea-Facing Apartment</h3>
+          <div class="listing-loc">Block 5, Clifton</div>
+          <div class="listing-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 10v9h18v-9M3 10l9-6 9 6M9 19v-5h6v5"/></svg>3 Bed</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>3 Bath</span>
+            <span class="spec mono">2100 Sq Ft</span>
+          </div>
+          <div class="listing-foot">
+            <div class="listing-price">PKR 2.1 Cr <span>/ sale</span></div>
+            <div class="listing-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--ink)" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-visual">
+          <img src="https://loremflickr.com/600/450/office,commercial-building?lock=103" alt="Commercial plaza unit, Bukhari Commercial" loading="lazy">
+          <span class="listing-status">For Sale</span>
+          <span class="listing-code mono">MRD-039</span>
+        </div>
+        <div class="listing-body">
+          <h3>Commercial Plaza Unit</h3>
+          <div class="listing-loc">Bukhari Commercial, DHA</div>
+          <div class="listing-specs">
+            <span class="spec mono">Ground Floor</span>
+            <span class="spec mono">840 Sq Ft</span>
+          </div>
+          <div class="listing-foot">
+            <div class="listing-price">PKR 1.6 Cr <span>· fixed</span></div>
+            <div class="listing-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--ink)" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container reveal">
+    <div class="types-strip">
+      <a href="#" class="type-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 10v9h18v-9M3 10l9-6 9 6M9 19v-5h6v5"/></svg>
+        <h4>Houses</h4>
+        <p>Bungalows &amp; villas across DHA</p>
+      </a>
+      <a href="#" class="type-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 21v-5h6v5"/></svg>
+        <h4>Apartments</h4>
+        <p>Sea-facing &amp; high-rise units</p>
+      </a>
+      <a href="#" class="type-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/></svg>
+        <h4>Plots</h4>
+        <p>Residential &amp; industrial land</p>
+      </a>
+      <a href="#" class="type-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 21h18M6 21V9l6-5 6 5v12M10 21v-6h4v6"/></svg>
+        <h4>Commercial</h4>
+        <p>Offices, shops &amp; warehouses</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="neighborhoods">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow">Coverage Map</span>
+        <h2>We know these blocks by heart.</h2>
+      </div>
+      <p>Meridian agents live and work in the neighborhoods they cover — every phase, every block number, every access road.</p>
+    </div>
+    <div class="hood-grid reveal">
+      <a href="#" class="hood-card">
+        <span class="hood-code mono">// PH-06</span>
+        <div class="hood-name">DHA Phase VI</div>
+        <div class="hood-count mono">142 listings</div>
+      </a>
+      <a href="#" class="hood-card">
+        <span class="hood-code mono">// PH-08</span>
+        <div class="hood-name">DHA Phase VIII</div>
+        <div class="hood-count mono">96 listings</div>
+      </a>
+      <a href="#" class="hood-card">
+        <span class="hood-code mono">// BTK</span>
+        <div class="hood-name">Bahria Town</div>
+        <div class="hood-count mono">211 listings</div>
+      </a>
+      <a href="#" class="hood-card">
+        <span class="hood-code mono">// CLF-05</span>
+        <div class="hood-name">Clifton Block 5</div>
+        <div class="hood-count mono">78 listings</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow">Why Meridian</span>
+        <h2>Precision over promises.</h2>
+      </div>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1 3-6z"/></svg>
+        <h3>Verified title, every time</h3>
+        <p>Each listing is cross-checked against DHA and society records before it reaches you — no forged files, no double-sold plots.</p>
+      </div>
+      <div class="why-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>Same-week viewings</h3>
+        <p>Our agents are on the ground in DHA, Bahria, and Clifton daily — most viewing requests are confirmed within 48 hours.</p>
+      </div>
+      <div class="why-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 3v18h18M8 17l4-6 3 3 5-8"/></svg>
+        <h3>Honest market pricing</h3>
+        <p>We price against real closed transactions in the block, not aspirational asking prices — so offers move faster.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow">The Process</span>
+        <h2>From first call to handover, in four steps.</h2>
+      </div>
+    </div>
+    <div class="process-wrap reveal">
+      <div class="process-line"></div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <h4>Brief &amp; shortlist</h4>
+          <p>Tell us your budget, block preference, and must-haves. We shortlist matching properties within a day.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <h4>Guided viewings</h4>
+          <p>An agent walks every shortlisted property with you, flagging anything a first-time buyer might miss.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <h4>Title verification</h4>
+          <p>We confirm ownership, dues, and society records before any token amount changes hands.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <h4>Transfer &amp; handover</h4>
+          <p>We coordinate the transfer paperwork end-to-end and hand you the keys — and the file.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="agents">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow">The Team</span>
+        <h2>Agents who work one neighborhood, not all of Karachi.</h2>
+      </div>
+    </div>
+    <div class="agents-grid reveal">
+      <div class="agent-card">
+        <div class="agent-photo"><img src="https://i.pravatar.cc/400?img=47" alt="Ayesha Khan" loading="lazy"></div>
+        <h4>Ayesha Khan</h4>
+        <div class="agent-role">DHA Phase VI</div>
+        <div class="agent-stat mono">112 closed deals</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-photo"><img src="https://i.pravatar.cc/400?img=51" alt="Bilal Raza" loading="lazy"></div>
+        <h4>Bilal Raza</h4>
+        <div class="agent-role">Bahria Town</div>
+        <div class="agent-stat mono">89 closed deals</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-photo"><img src="https://i.pravatar.cc/400?img=32" alt="Sana Malik" loading="lazy"></div>
+        <h4>Sana Malik</h4>
+        <div class="agent-role">Clifton</div>
+        <div class="agent-stat mono">64 closed deals</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-photo"><img src="https://i.pravatar.cc/400?img=59" alt="Hamza Jamil" loading="lazy"></div>
+        <h4>Hamza Jamil</h4>
+        <div class="agent-role">Commercial · DHA</div>
+        <div class="agent-stat mono">57 closed deals</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow">Client Notes</span>
+        <h2>What buyers and owners tell us.</h2>
+      </div>
+    </div>
+    <div class="test-grid reveal">
+      <div class="test-card">
+        <p>"They found title issues on a plot we almost bought elsewhere. That alone saved us months of court trouble."</p>
+        <div class="test-name">Farrukh Siddiqui</div>
+        <div class="test-role">Buyer, DHA Phase VIII</div>
+      </div>
+      <div class="test-card">
+        <p>"Our commercial unit rented out in eleven days. Meridian's pricing was blunt, and it worked."</p>
+        <div class="test-name">Nadia Qureshi</div>
+        <div class="test-role">Owner, Bukhari Commercial</div>
+      </div>
+      <div class="test-card">
+        <p>"No pressure, no cold calls. Just a shortlist that actually matched what we asked for."</p>
+        <div class="test-name">Omar Aziz</div>
+        <div class="test-role">Buyer, Bahria Town</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="blueprint" style="opacity:0.5;"></div>
+  <div class="container" style="position:relative;">
+    <span class="eyebrow" style="justify-content:center;">Start Your Search</span>
+    <h2>Tell us the block. We'll bring the shortlist.</h2>
+    <div>
+      <a href="tel:+922135856470" class="btn-primary">Call +92 21-35856470</a>
+      <a href="mailto:info@meridianestates.pk" class="btn-primary" style="background:transparent; color:var(--gold-bright);">Email Us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo" style="margin-bottom:18px; display:inline-flex;">
+          <div class="logo-mark"></div>
+          <span class="logo-text">MERIDIAN <b>ESTATES</b></span>
+        </a>
+        <p style="color:var(--ink-faint); font-size:13.5px; line-height:1.7; max-width:280px;">Surveying Karachi's finest addresses since 2008 — DHA, Bahria Town, and Clifton.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <a href="#listings">Listings</a>
+        <a href="#neighborhoods">Neighborhoods</a>
+        <a href="#process">How It Works</a>
+        <a href="#agents">Agents</a>
+      </div>
+      <div class="footer-col">
+        <h5>Property Type</h5>
+        <a href="#">Houses</a>
+        <a href="#">Apartments</a>
+        <a href="#">Plots</a>
+        <a href="#">Commercial</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="tel:+922135856470">+92 21-35856470</a>
+        <a href="mailto:info@meridianestates.pk">info@meridianestates.pk</a>
+        <a href="#">Bukhari Commercial, DHA Karachi</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Meridian Estates. All rights reserved.</p>
+      <p class="credit">Concept site by <a href="#">The Readyfy</a> — websites for real estate agencies.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // count-up stats
+  const stats = document.querySelectorAll('.stat-num');
+  let counted = false;
+  function countUp(){
+    if(counted) return;
+    counted = true;
+    stats.forEach(el=>{
+      const target = parseInt(el.dataset.count, 10);
+      let cur = 0;
+      const step = Math.max(1, Math.round(target/40));
+      const iv = setInterval(()=>{
+        cur += step;
+        if(cur >= target){ cur = target; clearInterval(iv); }
+        el.textContent = cur;
+      }, 30);
+    });
+  }
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.closest('.hero')) countUp();
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // trigger hero stats immediately since above the fold
+  window.addEventListener('load', ()=> setTimeout(countUp, 400));
+</script>
+
+</body>
+</html>
